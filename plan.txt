@@ -1,0 +1,20 @@
+
+java.base:
+	annotation 注解
+	reflect 反射、动态链接
+	io
+	nio
+	net 网络
+	time 时间和日期
+
+
+
+java.net.http
+
+java.sql
+
+java.xml
+	
+	
+	
+	
