@@ -1,0 +1,42 @@
+主要研究内容：计算机实验室没有外界互联网，同学们的数据需要及时的进行存储。
+设计基于web的网络硬盘系统系统。参考工具框架为：java+mysql+spring mvc 。
+
+
+
+总字数不低于20000
+
+参考连接： https://wenku.baidu.com/view/101a316a51e79b896902265a.html
+
+vue-simple-uploader : https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
+后端spring代码：https://github.com/LuoLiangDSGA/spring-learning/tree/master/boot-uploader
+摘要（中英文）
+引言
+
+校园存储现状分析 （2页）
+	现状
+	需要解决的问题
+	目标描述
+	开发过程
+开发技术平台介绍 （2页）字数不超过1000
+	Java技术介绍
+	SpringBoot技术介绍
+	MySQL介绍
+	HTML File API介绍
+	Axios介绍
+	
+系统分析 （5页以上）字数不低于2000
+	可行性分析
+	需求分析
+	
+系统设计 （30页以上）字数不低于12000
+	总体设计
+	数据库设计
+	详细设计
+
+系统实现、测试及错误处理 字数不低于3000
+总结
+
+附录1 文献综述
+附录2 文献翻译（中文+英文）
+附录3 主要源代码
+
