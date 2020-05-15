@@ -1,0 +1,140 @@
+admin
+	id
+	role_id
+	admin_name
+	admin_password
+	department_id //分管部门id, 一旦分配，则只能维护本部门的数据操作，包括修改本部门所属用户的密码，获取本部门的统计信息
+
+
+department
+	id // 部门id
+	type // 学院或其他部门【如教务处等】0、专业1、班级2
+	title //部门名称
+	parent_department_id //父部门id
+
+user
+	id, 
+	password, 
+	nickname, 
+	avatar_path[注意这里是存储在磁盘上的路径名], 
+	gender: 
+	brief: 个人简介, 
+	email: 邮箱，
+	type[教师，学生]，教师的存储空间比学生多, 
+	space_size: 存储空间大小，单位为G，必须是整数
+	used_space_size: 已使用的空间大小 // 避免每次都去查file表
+	department_id //学生的部门信息精确到班级，教师的部门精确到学院
+	is_delete // 是否删除
+
+black_list
+	user.id
+	type 黑名单类型 0表示警告，1表示加入，2表示移除
+	expire_date // 自动过期时间
+
+login
+	user_id
+	ip // 记录登录ip
+	date // 记录登录日期
+	
+file [这里文件和已删除的文件的表、备份文件表（3份）分开]
+	id,
+	name,
+	size,
+	mime,
+	type, 这里mime和type的区别为，mime为HTML File API识别的，type为系统判断的
+	is_folder, 是否是文件夹
+	parent_folder, 父文件夹 根目录为 /
+	relative_path, 系统路径,指相对于数据文件夹的路径，数据文件夹比如为/data，另外，后面加上每天的日期，然后才是文件的相对路径
+	total_chunk_number, 总的分块数量
+	user // 上传者
+	upload_date //上传时间
+	is_delete // 是否删除，0表示未删除、1表示加入回收站，对于物理删除[需校验文件是否存在于与用于的关联，如果不存在，才转移到已删除文件表]，将进行分表存储
+
+chunk[分块信息]
+	// id和chunkNumber共同组成主键
+	id, // 这里指的是分块所属文件的id,同时作为chunk的主键
+	chunk_umber, // 分块编号
+	chunk_size, // 分块大小
+	current_chunk_size, //当前分块大小
+	current_chucnk_path, //当前分块的存储路径	
+	
+user_file
+	user_id
+	file_id // user_id & file_id共同组成主键
+	create_date // 关系的创建时间
+
+download
+	user_id
+	file_id // user_id + file_id共同组成主键
+	download_date // 下载日期
+	
+share
+	id //分享的id,用户通过url中访问此分享，用于获取分享
+	file_id, //关联的文件id
+	create_date,
+	expire_date, //过期日期 -1
+	password // 分享的密码 // 四位数字或大小写字母
+	user // 分享的创建者
+	
+share_user // 保存哪些用户获取过分享
+	share_id // 分享id
+	user_id // 用户id
+	create_date // 创建日期记录用户是何时获取此分享的
+
+share_inform
+	share_id
+	delete_date
+	inform_user_id
+	inform_date
+	state //是否已受理 0否 1是
+
+share_delete
+	share_id
+	delete_date
+	operator_id // 表示管理员的id
+
+group // 组和分享的区别在于，分享是单向的，而组是双向的，即团队协作的意思
+	id
+	user_id // 创建组的用户id，简称组长
+	user_type // 面向的用户类型 0表示无限制，1表示仅限学生，2表示仅限教师用户
+	create_date // 创建日期
+	file_id // 关联的文件id，只能为文件夹，如果是单个文件，那么和普通分享没有区别
+	is_readable // 是否可读，默认为true,
+	read_expire_date // 可读的截至日期，这里的可读指的是，该组的其他成员[除创建者以外的用户]是否有权限读取该文件夹内的其他文件[自己上传的除外]
+	is_writeable // 是否可写， 默认为true
+	write_expire_date //可写的截至日期， 在可写截至日期前都可以修改，包括删除，重新上传等
+	
+group_department
+	group_id
+	department_id
+	operator_id //管理员id
+	
+group_delete
+	
+	
+group_invitation //组邀请，只有用户真正同意加入后，才能成为该组的成员 如果组关联的部门为空，则表示自定义用户，此时需要手动输入用户的ID；否则，批量向用户发出邀请
+	id
+	user_id, // 用户id
+	group_id // 组id
+	expire_date // 邀请过期日期
+	state //记录状态，0表示未接受，1表示已接受
+	review //组创建者对各个组成员的评价， 比如教师批改学生作业时的批注
+	review_state //是否已读
+	
+	
+
+
+// 前端需要处理的消息类型
+	黑名黑警告
+	移除黑名单
+	组邀请
+	组评论通知
+	组被删除通知
+	分享被删除通知
+	
+	
+	
+	
+	
+	
+	
