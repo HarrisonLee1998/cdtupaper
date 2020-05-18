@@ -6,6 +6,7 @@
 总字数不低于20000
 
 参考连接： https://wenku.baidu.com/view/101a316a51e79b896902265a.html
+参考链接：https://wenku.baidu.com/view/78d7ce28bd64783e09122b73.html
 
 vue-simple-uploader : https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
 后端spring代码：https://github.com/LuoLiangDSGA/spring-learning/tree/master/boot-uploader
@@ -27,6 +28,7 @@ vue-simple-uploader : https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
 系统分析 （5页以上）字数不低于2000
 	可行性分析
 	需求分析
+	功能分析
 	
 系统设计 （30页以上）字数不低于12000
 	总体设计
@@ -39,4 +41,15 @@ vue-simple-uploader : https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
 附录1 文献综述
 附录2 文献翻译（中文+英文）
 附录3 主要源代码
+
+
+文件上传模块
+	自有空间
+	组空间
+
+如何处理文件夹的ID
+	文件夹名+用户ID 生成md5
+	
+
+
 

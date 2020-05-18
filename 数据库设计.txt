@@ -1,9 +1,20 @@
+处理分享举报
+处理组举报
+黑名单处理
+
+
+
+role
+	id
+	department_id //分管部门id, 一旦分配，则只能维护本部门的数据操作，包括修改本部门所属用户的密码，获取本部门的统计信息
+	
+
+	
 admin
 	id
 	role_id
 	admin_name
 	admin_password
-	department_id //分管部门id, 一旦分配，则只能维护本部门的数据操作，包括修改本部门所属用户的密码，获取本部门的统计信息
 
 
 department
@@ -24,12 +35,13 @@ user
 	space_size: 存储空间大小，单位为G，必须是整数
 	used_space_size: 已使用的空间大小 // 避免每次都去查file表
 	department_id //学生的部门信息精确到班级，教师的部门精确到学院
-	is_delete // 是否删除
+	is_delete // 是否删除，已删除用户不能再登录
 
 black_list
 	user.id
 	type 黑名单类型 0表示警告，1表示加入，2表示移除
 	expire_date // 自动过期时间
+	has_read // 是否已读
 
 login
 	user_id
@@ -46,7 +58,7 @@ file [这里文件和已删除的文件的表、备份文件表（3份）分开]
 	parent_folder, 父文件夹 根目录为 /
 	relative_path, 系统路径,指相对于数据文件夹的路径，数据文件夹比如为/data，另外，后面加上每天的日期，然后才是文件的相对路径
 	total_chunk_number, 总的分块数量
-	user // 上传者
+	user.id // 上传者
 	upload_date //上传时间
 	is_delete // 是否删除，0表示未删除、1表示加入回收站，对于物理删除[需校验文件是否存在于与用于的关联，如果不存在，才转移到已删除文件表]，将进行分表存储
 
@@ -110,6 +122,8 @@ group_department
 	operator_id //管理员id
 	
 group_delete
+	group_delete
+	operator_id
 	
 	
 group_invitation //组邀请，只有用户真正同意加入后，才能成为该组的成员 如果组关联的部门为空，则表示自定义用户，此时需要手动输入用户的ID；否则，批量向用户发出邀请
@@ -119,7 +133,8 @@ group_invitation //组邀请，只有用户真正同意加入后，才能成为�
 	expire_date // 邀请过期日期
 	state //记录状态，0表示未接受，1表示已接受
 	review //组创建者对各个组成员的评价， 比如教师批改学生作业时的批注
-	review_state //是否已读
+	review_state // 是否已读
+	
 	
 	
 
