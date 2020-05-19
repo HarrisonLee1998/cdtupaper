@@ -35,8 +35,9 @@ user
 	space_size: 存储空间大小，单位为G，必须是整数
 	used_space_size: 已使用的空间大小 // 避免每次都去查file表
 	department_id //学生的部门信息精确到班级，教师的部门精确到学院
-	is_delete // 是否删除，已删除用户不能再登录
-
+	limit //是否受限制
+	
+	
 black_list
 	user.id
 	type 黑名单类型 0表示警告，1表示加入，2表示移除
@@ -47,6 +48,7 @@ login
 	user_id
 	ip // 记录登录ip
 	date // 记录登录日期
+	status // 是否登录成功
 	
 file [这里文件和已删除的文件的表、备份文件表（3份）分开]
 	id,
@@ -72,8 +74,11 @@ chunk[分块信息]
 	
 user_file
 	user_id
-	file_id // user_id & file_id共同组成主键
-	create_date // 关系的创建时间
+	file_id
+	f_name
+	f_type
+	p_fid
+	create_date
 
 download
 	user_id
@@ -135,10 +140,35 @@ group_invitation //组邀请，只有用户真正同意加入后，才能成为�
 	review //组创建者对各个组成员的评价， 比如教师批改学生作业时的批注
 	review_state // 是否已读
 	
-	
+
+
+
+
+
+file_share
+	id
+	u_id 
+	expire_date
 	
 
 
+file_group
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
 // 前端需要处理的消息类型
 	黑名黑警告
 	移除黑名单
@@ -146,6 +176,27 @@ group_invitation //组邀请，只有用户真正同意加入后，才能成为�
 	组评论通知
 	组被删除通知
 	分享被删除通知
+	
+	
+
+sessionId -> LoginInfo
+uid -> user
+
+
+拦截器根据userid获取ip，再比较request Ip == login_info Ip，如果相等，则不管，如果不等，说明登录信息被覆盖了
+
+1024*1024*1024
+
+
+	
+	
+	
+	系统前台设计
+
+
+
+	
+	
 	
 	
 	
