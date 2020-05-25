@@ -50,6 +50,26 @@ vue-simple-uploader : https://www.cnblogs.com/xiahj/p/vue-simple-uploader.html
 如何处理文件夹的ID
 	文件夹名+用户ID 生成md5
 	
+文件上传
+	选择files
+	计算files的md5，保存{MD5: files}到全局对象
+	
+	uploadFile: 获取文件列表
+	computeMD5: 计算MD5
+	handleUpload: 处理上传，对文件分片，封装表单数据，根据响应，并决定是否上传，调整进度条，显示上传成果，成功， 失败
+	checkChunk: 检查分片是否存在                    upload: 上传
+	
+文件夹上传
+	
+	
+	
+	
+	
+	
+	
+	
+
+
 
 
 
